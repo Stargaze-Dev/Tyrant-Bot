@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const { Client, IntentsBitField } = require("discord.js");
 
 const TyrantP = new Client({
@@ -10,36 +10,40 @@ const TyrantP = new Client({
   ],
 });
 
-TyrantP.on('ready', (pClient) => {
+TyrantP.on("ready", (pClient) => {
   console.log(`${pClient.user.tag} is online.`);
 });
 
-TyrantP.on('messageCreate', (message) => {
+TyrantP.on("messageCreate", (message) => {
   switch (message.author.bot) {
     case false:
-      if (message.content === 'Hello') {
+      if (message.content === "Hello") {
         message.reply(`Hello ${message.author}`);
       }
       break;
     default:
       break;
-    }
+  }
 });
 
-TyrantP.on('interactionCreate', (interaction) => {
+TyrantP.on("interactionCreate", (interaction) => {
   if (!interaction.isChatInputCommand()) return;
   console.log(interaction);
   console.log(interaction.commandName);
   switch (interaction.commandName) {
-    case 'hey':
-      interaction.reply(`Hey ${interaction.member.nickname}!`)
+    case "hey":
+      interaction.reply(`Hey ${interaction.member.nickname}!`);
       break;
-    case 'ping':
+    case "ping":
       interaction.reply(`Pong!`);
-  
+      break;
+    case "add":
+      const num1 = interaction.options.get("first-number")?.value;
+      const num2 = interaction.options.get("second-number")?.value;
+      interaction.reply(`The sum of ${num1} & ${num2} is ${num1 + num2}`);
     default:
       break;
   }
-})
+});
 
 TyrantP.login(process.env.PTOKEN);
