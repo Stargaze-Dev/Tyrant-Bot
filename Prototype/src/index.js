@@ -26,4 +26,20 @@ TyrantP.on('messageCreate', (message) => {
     }
 });
 
+TyrantP.on('interactionCreate', (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+  console.log(interaction);
+  console.log(interaction.commandName);
+  switch (interaction.commandName) {
+    case 'hey':
+      interaction.reply(`Hey ${interaction.member.nickname}!`)
+      break;
+    case 'ping':
+      interaction.reply(`Pong!`);
+  
+    default:
+      break;
+  }
+})
+
 TyrantP.login(process.env.PTOKEN);
