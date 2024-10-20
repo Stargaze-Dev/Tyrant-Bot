@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Client, IntentsBitField } = require("discord.js");
+const { Client, IntentsBitField, EmbedBuilder, } = require("discord.js");
 
 const TyrantP = new Client({
   intents: [
@@ -41,8 +41,50 @@ TyrantP.on("interactionCreate", (interaction) => {
       const num1 = interaction.options.get("first-number")?.value;
       const num2 = interaction.options.get("second-number")?.value;
       interaction.reply(`The sum of ${num1} & ${num2} is ${num1 + num2}`);
+      break;
+    case "embed":
+      const embed = new EmbedBuilder()
+        .setTitle("This is an embed title")
+        .setDescription("This is an embed description")
+        .setColor(`Random`)
+        .addFields(
+          {
+            name: "Field Title",
+            value: "Some value",
+            inline: true,
+          },
+          {
+            name: "Second Field Title",
+            value: "Some other value",
+            inline: true,
+          }
+        );
+      interaction.reply({ embeds: [embed] });
+      break;
     default:
       break;
+  }
+});
+
+TyrantP.on("messageCreate", (message) => {
+  if (message.content === "embed") {
+    const embed = new EmbedBuilder()
+      .setTitle("This is an embed title")
+      .setDescription("This is an embed description")
+      .setColor(`Random`)
+      .addFields(
+        {
+          name: "Field Title",
+          value: "Some value",
+          inline: true,
+        },
+        {
+          name: "Second Field Title",
+          value: "Some other value",
+          inline: true,
+        }
+      );
+    message.channel.send({embeds: [embed]});
   }
 });
 
