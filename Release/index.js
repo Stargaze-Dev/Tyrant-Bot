@@ -1,7 +1,7 @@
-require('dotenv').config();
+require("dotenv").config();
 const { Client, IntentsBitField } = require("discord.js");
 
-const TyrantR = new Client({
+const tyrantR = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
@@ -10,8 +10,8 @@ const TyrantR = new Client({
   ],
 });
 
-TyrantR.on('ready', (rClient) => {
+tyrantR.on("ready", (rClient) => {
   console.log(`${rClient.user.tag} is online.`);
 });
 
-TyrantR.login(process.env.RTOKEN);
+tyrantR.login(process.env.RTOKEN);

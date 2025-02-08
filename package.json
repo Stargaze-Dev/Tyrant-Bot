@@ -2,7 +2,7 @@
   "name": "tyrant-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "/Developing Programs/Tyrant-Bot/Prototype/src/index.js",
+  "main": "Prototype/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

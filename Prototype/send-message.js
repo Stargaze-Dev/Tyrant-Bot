@@ -1,4 +1,4 @@
-require(`dotenv`).config();
+/*require(`dotenv`).config();
 const {
   Client,
   IntentsBitField,
@@ -7,7 +7,7 @@ const {
   ButtonStyle,
 } = require(`discord.js`);
 
-const TyrantP = new Client({
+const tyrantP = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
@@ -31,9 +31,9 @@ const roles = [
   },
 ];
 
-TyrantP.on(`ready`, async (pClient) => {
+tyrantP.on(`ready`, async (pClient) => {
   try {
-    const channel = await TyrantP.channels.cache.get(`1237225031122288700`);
+    const channel = await tyrantP.channels.cache.get(`1237225031122288700`);
     if (!channel) return;
     const row = new ActionRowBuilder();
     roles.forEach((role) => {
@@ -55,4 +55,4 @@ TyrantP.on(`ready`, async (pClient) => {
   }
 });
 
-TyrantP.login(process.env.PTOKEN);
+tyrantP.login(process.env.PTOKEN);*/

@@ -1,4 +1,4 @@
-require(`dotenv`).config();
+/*require(`dotenv`).config();
 const { REST, Routes, ApplicationCommandOptionType } = require(`discord.js`);
 
 const commands = [
@@ -73,3 +73,4 @@ const rest = new REST({ version: `10` }).setToken(process.env.PTOKEN);
     console.log(`There was an error performing this task: ${error}`);
   }
 })();
+*/

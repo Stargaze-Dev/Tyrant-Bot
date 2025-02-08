@@ -1,7 +1,14 @@
 require(`dotenv`).config();
-const { Client, IntentsBitField, EmbedBuilder } = require(`discord.js`);
+const {
+  Client,
+  IntentsBitField,
+  EmbedBuilder,
+  ActivityType,
+  Activity,
+} = require(`discord.js`);
+const eventHandler = require("../Prototype/handlers/eventHandler");
 
-const TyrantP = new Client({
+const tyrantP = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
@@ -10,23 +17,69 @@ const TyrantP = new Client({
   ],
 });
 
-TyrantP.on(`ready`, (pClient) => {
-  console.log(`${pClient.user.tag} is online.`);
+let status = [
+  {
+    name: `a solo challenge to break Stargaze's sanity`,
+    type: ActivityType.Competing,
+  },
+  {
+    name: `Finding help, I took the jokes too far`,
+    type: ActivityType.Custom,
+  },
+  {
+    name: `to Stargaze complain about how I don't work properly :P`,
+    type: ActivityType.Listening,
+  },
+  {
+    name: `with Stargaze's sanity`,
+    type: ActivityType.Playing,
+  },
+  {
+    name: `the pain Stargaze experiences when my code doesn't work`,
+    type: ActivityType.Streaming,
+    url: `https://www.youtube.com/watch?v=H8jdqm9Ntl4`, //Aaaaauuuugh
+  },
+  {
+    name: `the prototyping of Tyrant with Stargaze`,
+    type: ActivityType.Streaming,
+    url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`, //Rick Roll
+  },
+  {
+    name: `the making of Tyrant with Stargaze`,
+    type: ActivityType.Streaming,
+    url: `https://www.youtube.com/watch?v=Ksj_GfzE6Mg`, //'All The Small Things' but Pikmin
+  },
+  {
+    name: `the progression of Tyrant with Stargaze`,
+    type: ActivityType.Streaming,
+    url: `https://www.youtube.com/watch?v=aWfOalyu-RQ`, //Kirby falling off a cliff
+  },
+  {
+    name: `the creation of Tyrant with Stargaze`,
+    type: ActivityType.Streaming,
+    url: `https://www.youtube.com/watch?v=2lEpY6hIg6w`, //Fart on my roommates door
+  },
+  {
+    name: `the development of Tyrant with Stargaze`,
+    type: ActivityType.Streaming,
+    url: ``, //TBD
+  },
+  {
+    name: `Stargaze cry`,
+    type: ActivityType.Watching,
+    url: ``,
+  },
+];
+
+tyrantP.on(`ready`, (pClient) => {
+  setInterval(() => {
+    let random = Math.floor(Math.random() * status.length);
+    console.log(random);
+    tyrantP.user.setActivity(status[random]);
+  }, 600000);
 });
 
-TyrantP.on(`messageCreate`, (message) => {
-  switch (message.author.bot) {
-    case false:
-      if (message.content === `Hello`) {
-        message.reply(`Hello ${message.author}`);
-      }
-      break;
-    default:
-      break;
-  }
-});
-
-TyrantP.on(`interactionCreate`, async (interaction) => {
+/*tyrantP.on(`interactionCreate`, async (interaction) => {
   console.log(interaction);
   console.log(interaction.commandName);
   await interaction.deferReply({ ephemeral: true });
@@ -82,13 +135,11 @@ TyrantP.on(`interactionCreate`, async (interaction) => {
         default:
           break;
       }
-    } 
-  } catch (error) {
-    
-  }
+    }
+  } catch (error) {}
 });
 
-TyrantP.on(`messageCreate`, (message) => {
+tyrantP.on(`messageCreate`, (message) => {
   if (message.content === `embed`) {
     const embed = new EmbedBuilder()
       .setTitle(`This is an embed title`)
@@ -108,6 +159,8 @@ TyrantP.on(`messageCreate`, (message) => {
       );
     message.channel.send({ embeds: [embed] });
   }
-});
+});*/
 
-TyrantP.login(process.env.PTOKEN);
+eventHandler(tyrantP);
+
+tyrantP.login(process.env.PTOKEN);
