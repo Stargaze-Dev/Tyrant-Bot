@@ -30,8 +30,32 @@ module.exports = {
       return;
     }
 
-    const targetUserRolePosition = targetUser.roles.highest.position; //Target user's highest role
-    
+    const targetUserRolePosition = targetUser.roles.highest.position; //The highest role of the user targetted by the command
+    const requestUserRolePosition = interaction.member.roles.highest.position; //The highest role of the user running the command
+    const botRolePosition = interaction.guild.members.me.roles.highest.position; //The highest role of the bot
+
+    if (targetUserRolePosition >= requestUserRolePosition) {
+      await interaction.editReply(
+        `**Ban unsuccessful**\n**Target:** ${targetUser}\n**Error:** You cannot ban a user of the same or higher rank to yourself.`
+      );
+      return;
+    }
+
+    if (targetUserRolePosition >= botRolePosition) {
+      await interaction.editReply(
+        `**Ban unsuccessful**\n**Target:** ${targetUser}\n**Error:** I cannot ban a user of the same or higher rank to myself`
+      );
+      return;
+    }
+
+    try {
+      await targetUser.ban({ reason });
+      await interaction.editReply(
+        `**Ban successful**\n**Target:** ${targetUser}\n**Reason:** ${reason}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   name: `ban`,

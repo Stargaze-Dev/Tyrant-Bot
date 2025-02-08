@@ -1,4 +1,4 @@
-/*require(`dotenv`).config();
+require(`dotenv`).config();
 const {
   Client,
   IntentsBitField,
@@ -55,4 +55,4 @@ tyrantP.on(`ready`, async (pClient) => {
   }
 });
 
-tyrantP.login(process.env.PTOKEN);*/
+tyrantP.login(process.env.PTOKEN);
